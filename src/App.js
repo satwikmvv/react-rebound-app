@@ -22,14 +22,14 @@ class App extends Component {
   
   componentDidUpdate(){
     
-    
+    console.log(window)
   }
 
   render() {
     const videoConstraints = {
       width: 1280,
       height: 720,
-      facingMode: "user"
+      facingMode: { exact: "environment" }
     };
     return (
       <div className="containerbox">
