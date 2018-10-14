@@ -11,38 +11,50 @@ class App extends Component {
   takePicture() {
     this.camera.capture()
     .then(blob => {
+      console.log(blob);
       this.img.src = URL.createObjectURL(blob);
       this.img.onload = () => { URL.revokeObjectURL(this.src); }
     })
   }
 
   render() {
+    console.log(this);
     return (
-      <div style={style.container}>
-        <Camera
-          style={style.preview}
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-        >
-          <div style={style.captureContainer} onClick={this.takePicture}>
-            <div style={style.captureButton} />
-          </div>
-        </Camera>
-        <img
-          style={style.captureImage}
-          ref={(img) => {
-            this.img = img;
-          }}
-        />
+      <div className="containerbox">
+        <h1>SRASH</h1>
+        <div style={style.container}>
+          <Camera
+            style={style.preview}
+            ref={(cam) => {
+              this.camera = cam;
+            }}
+          >
+            <div style={style.captureContainer} onClick={this.takePicture}>
+              <div style={style.captureButton} />
+            </div>
+          </Camera>
+          <img
+            style={style.captureImage}
+            alt=''
+            ref={(img) => {
+              this.img = img;
+            }}
+          />
+        </div>
       </div>
+      
     );
   }
 }
 
 const style = {
+  container: {
+    height: '50%' ,
+    width:'50%',
+    margin: '0 auto'
+  },
   preview: {
-    position: 'relative',
+    position: 'relative'
   },
   captureContainer: {
     display: 'flex',
