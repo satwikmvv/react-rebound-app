@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Camera from 'react-camera';
+import Webcam from "react-webcam";
 
 class App extends Component {
   constructor(props) {
@@ -8,80 +9,47 @@ class App extends Component {
     this.state={
       imgsrc:'No picture'
     }
-    this.takePicture = this.takePicture.bind(this);
   }
-
-  takePicture() {
-    this.camera.capture()
-    .then(blob => {
-      console.log(blob);
-      this.img.src = URL.createObjectURL(blob);
-      this.setState({
-        imgsrc:this.img.src
-      })
-      this.img.onload = () => { URL.revokeObjectURL(this.src); }
+  setRef = webcam => {
+    this.webcam = webcam;
+  };
+ 
+  capture = () => {
+    this.setState({
+      imgsrc:this.webcam.getScreenshot()
     })
-    
-  }
+  };
+  
   componentDidUpdate(){
     
-    console.log(this)
+    
   }
 
   render() {
-    console.log(this);
+    const videoConstraints = {
+      width: 1280,
+      height: 720,
+      facingMode: "user"
+    };
     return (
       <div className="containerbox">
         <h1>SRASH</h1>
-        <div style={style.container}>
-          <Camera
-            style={style.preview}
-            ref={(cam) => {
-              this.camera = cam;
-            }}
-          >
-            
-          </Camera>
-          <button onClick={this.takePicture}>Capture</button>
-          <p>{this.state.imgsrc}</p>
-          <img
-            style={style.captureImage}
-            alt=''
-            ref={(img) => {
-              this.img = img;
-            }}
-          />
-        </div>
+       
+        <Webcam 
+        audio={false}
+        height={350}
+        ref={this.setRef}
+        screenshotFormat="image/jpeg"
+        width={350}
+        videoConstraints={videoConstraints}
+        />
+        <button onClick={this.capture}>Capture photo</button>
+        <p>{this.state.imgsrc}</p>
       </div>
       
     );
   }
 }
 
-const style = {
-  container: {
-    height: '50%' ,
-    width:'80%',
-    margin: '0 auto'
-  },
-  preview: {
-  },
-  captureContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    bottom: 0,
-    width: '100%'
-  },
-  captureButton: {
-    backgroundColor: '#000',
-    borderRadius: '50%',
-    height: 56,
-    width: 56,
-    color: '#000',
-    margin: 20
-  },
-  captureImage: {
-    width: '100%',
-  }
-};
+
 export default App;
