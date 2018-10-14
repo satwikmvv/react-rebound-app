@@ -29,10 +29,11 @@ class App extends Component {
               this.camera = cam;
             }}
           >
-            <div style={style.captureContainer} onClick={this.takePicture}>
+            
+          </Camera>
+          <div style={style.captureContainer} onClick={this.takePicture}>
               <div style={style.captureButton} />
             </div>
-          </Camera>
           <img
             style={style.captureImage}
             alt=''
@@ -50,22 +51,19 @@ class App extends Component {
 const style = {
   container: {
     height: '50%' ,
-    width:'50%',
+    width:'80%',
     margin: '0 auto'
   },
   preview: {
-    position: 'relative'
   },
   captureContainer: {
     display: 'flex',
-    position: 'absolute',
     justifyContent: 'center',
-    zIndex: 1,
     bottom: 0,
     width: '100%'
   },
   captureButton: {
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     borderRadius: '50%',
     height: 56,
     width: 56,
