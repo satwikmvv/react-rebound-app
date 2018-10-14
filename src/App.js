@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Camera from 'react-camera';
 import Webcam from "react-webcam";
 
 class App extends Component {
@@ -29,7 +28,7 @@ class App extends Component {
     const videoConstraints = {
       width: 1280,
       height: 720,
-      facingMode: { exact: "environment" }
+      facingMode:  "environment" 
     };
     return (
       <div className="containerbox">
