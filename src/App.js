@@ -21,7 +21,7 @@ class App extends Component {
   
   componentDidUpdate(){
     
-    console.log(window)
+    console.log(window.location.href+`app/${this.state.imgsrc.substring(24)}`)
   }
 
   render() {
