@@ -31,9 +31,7 @@ class App extends Component {
           >
             
           </Camera>
-          <div style={style.captureContainer} onClick={this.takePicture}>
-              <div style={style.captureButton} />
-            </div>
+            <button onClick={this.takePicture}>Capture</button>
           <img
             style={style.captureImage}
             alt=''
