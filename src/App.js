@@ -5,6 +5,9 @@ import Camera from 'react-camera';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      imgsrc:'No picture'
+    }
     this.takePicture = this.takePicture.bind(this);
   }
 
@@ -13,8 +16,16 @@ class App extends Component {
     .then(blob => {
       console.log(blob);
       this.img.src = URL.createObjectURL(blob);
+      this.setState({
+        imgsrc:this.img.src
+      })
       this.img.onload = () => { URL.revokeObjectURL(this.src); }
     })
+    
+  }
+  componentDidUpdate(){
+    
+    console.log(this)
   }
 
   render() {
@@ -31,7 +42,8 @@ class App extends Component {
           >
             
           </Camera>
-            <button onClick={this.takePicture}>Capture</button>
+          <button onClick={this.takePicture}>Capture</button>
+          <p>{this.state.imgsrc}</p>
           <img
             style={style.captureImage}
             alt=''
